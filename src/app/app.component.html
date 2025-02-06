@@ -14,10 +14,12 @@
   <main class="content">
     <!-- Setup Guide Section -->
     <section *ngIf="activeSection === 'setup'" class="guide-section">
-      <h2>🚀 Initial Setup</h2>
+      <h2>Initial Setup</h2>
       <div class="code-block">
         <h3>1. Create New Angular Project</h3>
-        <pre><code>npm install -g @angular/cli
+        <pre><code># Install Angular CLI globally
+npm install -g &#64;angular/cli
+# Create new project
 ng new your-app-name
 cd your-app-name</code></pre>
       </div>
@@ -34,7 +36,7 @@ git push -u origin main</code></pre>
 
     <!-- GitHub Workflow Section -->
     <section *ngIf="activeSection === 'workflow'" class="guide-section">
-      <h2>⚙️ GitHub Actions Workflow</h2>
+      <h2>GitHub Actions Workflow</h2>
       <div class="code-block">
         <h3>1. Create Workflow Directory</h3>
         <pre><code>mkdir -p .github/workflows</code></pre>
@@ -53,13 +55,22 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout&#64;v4
+      
+      - name: Setup Node
+        uses: actions/setup-node&#64;v3
         with:
           node-version: '20'
-      - run: npm install
-      - run: npm run build
-      - uses: JamesIves/github-pages-deploy-action@v4
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build
+        run: npm run build
+      
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action&#64;v4
         with:
           folder: dist/browser</code></pre>
       </div>
@@ -67,24 +78,24 @@ jobs:
 
     <!-- Configuration Section -->
     <section *ngIf="activeSection === 'config'" class="guide-section">
-      <h2>⚡ Configuration Steps</h2>
+      <h2>Configuration Steps</h2>
       
       <div class="code-block">
         <h3>1. Update angular.json</h3>
-        <pre><code>{
-  "projects": {
-    "your-app-name": {
-      "architect": {
-        "build": {
-          "options": {
+        <pre><code>{{ '{' }}
+  "projects": {{ '{' }}
+    "your-app-name": {{ '{' }}
+      "architect": {{ '{' }}
+        "build": {{ '{' }}
+          "options": {{ '{' }}
             "outputPath": "dist/browser",
             "baseHref": "/repository-name/"
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
+          {{ '}' }}
+        {{ '}' }}
+      {{ '}' }}
+    {{ '}' }}
+  {{ '}' }}
+{{ '}' }}</code></pre>
       </div>
 
       <div class="code-block">
@@ -95,7 +106,7 @@ jobs:
 
     <!-- Deployment Section -->
     <section *ngIf="activeSection === 'deploy'" class="guide-section">
-      <h2>🎉 Deployment</h2>
+      <h2>Deployment</h2>
       
       <div class="steps-list">
         <div class="step">
@@ -122,103 +133,3 @@ jobs:
     <p>For more detailed information, visit our <a href="https://github.com/darshanparmark/AngularDemo#readme" target="_blank">GitHub Repository</a></p>
   </footer>
 </div>
-
-<style>
-.main-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 2rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, #1976d2, #1565c0);
-  color: white;
-  border-radius: 8px;
-}
-
-.subtitle {
-  opacity: 0.9;
-  margin-top: 0.5rem;
-}
-
-.navigation {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.navigation button {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  background: #f5f5f5;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.navigation button:hover {
-  background: #e0e0e0;
-}
-
-.navigation button.active {
-  background: #1976d2;
-  color: white;
-}
-
-.guide-section {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.code-block {
-  margin-bottom: 2rem;
-}
-
-.code-block h3 {
-  color: #1976d2;
-  margin-bottom: 1rem;
-}
-
-pre {
-  background: #f5f5f5;
-  padding: 1rem;
-  border-radius: 4px;
-  overflow-x: auto;
-}
-
-code {
-  font-family: 'Consolas', monospace;
-  font-size: 0.9rem;
-}
-
-.steps-list .step {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 4px;
-}
-
-.footer {
-  text-align: center;
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
-}
-
-a {
-  color: #1976d2;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-</style>

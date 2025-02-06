@@ -15,17 +15,16 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-demo/browser",
+            "outputPath": "dist",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "baseHref": "/AngularDemo/",
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -58,9 +57,12 @@
               "baseHref": "/AngularDemo/"
             },
             "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
+              "namedChunks": true,
               "baseHref": "/"
             }
           },
@@ -70,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "AngularDemo:build:production"
+              "browserTarget": "AngularDemo:build:production"
             },
             "development": {
-              "buildTarget": "AngularDemo:build:development"
+              "browserTarget": "AngularDemo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "AngularDemo:build"
+            "browserTarget": "AngularDemo:build"
           }
         },
         "test": {

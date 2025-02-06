@@ -1,3 +1,4 @@
+
 # Angular Demo - GitHub Pages Deployment Guide
 
 This repository demonstrates how to set up an Angular application and deploy it to GitHub Pages using GitHub Actions for continuous deployment.

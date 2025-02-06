@@ -8,9 +8,11 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  actions: write
+  deployments: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
@@ -18,8 +20,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
     - uses: actions/checkout@v4
@@ -51,21 +56,12 @@ jobs:
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
-      with:
-        enablement: true # Enable GitHub Pages during the workflow run
 
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: 'dist/angular-demo/browser'
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build-and-test
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
